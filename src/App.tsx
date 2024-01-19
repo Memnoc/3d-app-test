@@ -1,6 +1,8 @@
 import "./App.css";
+import { Model } from "../public/Shoe.jsx";
 import { useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
 import * as THREE from "three";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 
@@ -26,7 +28,13 @@ function App() {
         <div className="wrapper">
           <div className="card">
             <div className="product-canvas">
-              <Canvas></Canvas>
+              <Canvas>
+                <ambientLight />
+                <OrbitControls />
+                <Suspense fallback={null}>
+                  <Model />
+                </Suspense>
+              </Canvas>
             </div>
             <h2>Color chooser</h2>
             <div className="colors">
