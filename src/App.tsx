@@ -11,6 +11,7 @@ function App() {
     box1: "#f6b73",
     box2: "#ff0000",
     box3: "#0000ff",
+    box4: "#0000ff",
   });
 
   function handleColorChange(box) {
@@ -30,9 +31,22 @@ function App() {
             <div className="product-canvas">
               <Canvas>
                 <ambientLight />
-                <OrbitControls />
+                <OrbitControls
+                  enablePan={true}
+                  enableZoom={true}
+                  enableRotate={true}
+                />
                 <Suspense fallback={null}>
-                  <Model />
+                  <spotLight
+                    intensity={0.9}
+                    angle={0.1}
+                    penumbra={1}
+                    position={[10, 15, 10]}
+                    castShadow
+                  />
+                  <Model
+                    colorPicker={{ mesh: color, caps: color, laces: color }}
+                  />
                 </Suspense>
               </Canvas>
             </div>
@@ -46,9 +60,19 @@ function App() {
                   value={color.box1}
                   onChange={handleColorChange("box1")}
                 />
-                <label htmlFor="head">Main</label>
+                <label htmlFor="head">Mesh</label>
               </div>
 
+              <div>
+                <input
+                  type="color"
+                  id="head"
+                  name="box1"
+                  value={color.box4}
+                  onChange={handleColorChange("box4")}
+                />
+                <label htmlFor="head">Inner</label>
+              </div>
               <div>
                 <input
                   type="color"
@@ -67,7 +91,7 @@ function App() {
                   value={color.box3}
                   onChange={handleColorChange("box3")}
                 />
-                <label htmlFor="body">Soul</label>
+                <label htmlFor="body">Sole</label>
               </div>
             </div>
           </div>
